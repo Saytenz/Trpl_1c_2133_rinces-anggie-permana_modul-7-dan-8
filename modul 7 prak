@@ -1,0 +1,75 @@
+class Node {
+  int nodeValue;
+  Node? next;
+
+  Node(this.nodeValue);
+}
+
+class SingleLinkedList {
+  Node? head;
+
+  bool isEmpty() => head == null;
+
+  void insertBack(int data) {
+    Node newNode = Node(data);
+    if (isEmpty()) {
+      head = newNode;
+    } else {
+      Node? temp = head;
+      while (temp!.next != null) {
+        temp = temp.next;
+      }
+      temp.next = newNode;
+    }
+  }
+
+  Node? findNode(int data) {
+    Node? current = head;
+    while (current != null) {
+      if (current.nodeValue == data) {
+        return current;
+      }
+      current = current.next;
+    }
+    return null; // Tidak ditemukan
+  }
+
+  void printList() {
+    if (isEmpty()) {
+      print("List kosong.");
+      return;
+    }
+
+    Node? current = head;
+    while (current != null) {
+      print(current.nodeValue);
+      current = current.next;
+    }
+  }
+}
+
+void main() {
+  SingleLinkedList list = SingleLinkedList();
+  list.insertBack(10);
+  list.insertBack(20);
+  list.insertBack(30);
+
+  print("Isi Linked List:");
+  list.printList();
+
+  print("\nMencari node dengan nilai 20:");
+  Node? found = list.findNode(20);
+  if (found != null) {
+    print("Node ditemukan dengan nilai: ${found.nodeValue}");
+  } else {
+    print("Node tidak ditemukan.");
+  }
+
+  print("\nMencari node dengan nilai 99:");
+  Node? notFound = list.findNode(99);
+  if (notFound != null) {
+    print("Node ditemukan dengan nilai: ${notFound.nodeValue}");
+  } else {
+    print("Node tidak ditemukan.");
+  }
+}
